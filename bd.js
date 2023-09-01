@@ -1,5 +1,5 @@
 //bd.js
-export { selectUsuarios, selectUsuario };
+export { selectUsuarios, selectUsuario, insertUsuario };
 import pkg from "pg";
 const { Pool } = pkg;
 
@@ -15,8 +15,6 @@ async function selectUsuarios() {
   const res = await client.query("SELECT * FROM usuario");
   return res.rows;
 }
-
-export { selectUsuarios };
 //bd.js
 async function selectUsuario(id) {
   const client = await connect();
@@ -24,4 +22,11 @@ async function selectUsuario(id) {
   const usuario = [id];
   const res = await client.query(query, usuario);
   return res.rows;
+}
+//bd.js
+async function insertUsuario(data) {
+  const client = await connect();
+  const query = "INSERT INTO usuario (nome,senha,email) VALUES ($1,$2,$3) ";
+  const usuario = [data.nome, data.senha, data.email];
+  await client.query(query, usuario);
 }
