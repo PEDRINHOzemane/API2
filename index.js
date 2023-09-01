@@ -42,3 +42,5 @@ app.get("/usuarios", async (req, res) => {
 
   console.log("Rota GET/usuarios solicitada");
 });
+
+//teste
